@@ -2,6 +2,7 @@ import { createActions, createReducer } from 'reduxsauce';
 import { Record, fromJS, Map } from 'immutable';
 
 export const { Types: AuthTypes, Creators: AuthActions } = createActions({
+  requestLogin: ['providerType'],
   updateUser: ['data'],
   clearUser: null,
 }, { prefix: 'AUTH_' });

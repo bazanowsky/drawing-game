@@ -10,4 +10,12 @@ export default defineMessages({
     id: 'login.login',
     defaultMessage: 'Please login',
   },
+  facebook: {
+    id: 'login.facebook',
+    defaultMessage: 'Facebook',
+  },
+  google: {
+    id: 'login.google',
+    defaultMessage: 'Google',
+  },
 });

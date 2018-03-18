@@ -5,12 +5,14 @@ import { hot } from 'react-hot-loader';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'ramda';
 
+import { AuthActions } from '../../modules/auth/auth.redux';
 import { Login } from './login.component';
 
 const mapStateToProps = createStructuredSelector({
 });
 
 export const mapDispatchToProps = (dispatch) => bindActionCreators({
+  login: AuthActions.requestLogin,
 }, dispatch);
 
 export default compose(
