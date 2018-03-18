@@ -2,6 +2,18 @@
 # yarn lockfile v1
 
 
+"@atlaskit/css-reset@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@atlaskit/css-reset/-/css-reset-1.2.3.tgz#001690620e4c1602b0cd12951ae016add121678c"
+  dependencies:
+    "@atlaskit/util-shared-styles" "^2.10.3"
+
+"@atlaskit/util-shared-styles@^2.10.3":
+  version "2.10.7"
+  resolved "https://registry.yarnpkg.com/@atlaskit/util-shared-styles/-/util-shared-styles-2.10.7.tgz#d5b4a38f42daa08154e43a3e85f7605182903b41"
+  dependencies:
+    babel-runtime "^6.11.6"
+
 "@babel/code-frame@7.0.0-beta.36", "@babel/code-frame@^7.0.0-beta.35":
   version "7.0.0-beta.36"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.0.0-beta.36.tgz#2349d7ec04b3a06945ae173280ef8579b63728e4"
@@ -1238,7 +1250,7 @@ babel-register@^6.26.0:
     mkdirp "^0.5.1"
     source-map-support "^0.4.15"
 
-babel-runtime@^6.18.0, babel-runtime@^6.2.0, babel-runtime@^6.22.0, babel-runtime@^6.26.0, babel-runtime@^6.6.1:
+babel-runtime@^6.11.6, babel-runtime@^6.18.0, babel-runtime@^6.2.0, babel-runtime@^6.22.0, babel-runtime@^6.26.0, babel-runtime@^6.6.1:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   dependencies:
