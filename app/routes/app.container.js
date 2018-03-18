@@ -15,7 +15,6 @@ const mapStateToProps = createStructuredSelector({
 });
 
 export const mapDispatchToProps = (dispatch) => bindActionCreators({
-  setLanguage: LocalesActions.setLanguage,
 }, dispatch);
 
 export default compose(

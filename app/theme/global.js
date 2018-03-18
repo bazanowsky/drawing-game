@@ -11,4 +11,15 @@ injectGlobal`
       display: none;
     }
   }
+   
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+   
+  html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+  }
 `;
