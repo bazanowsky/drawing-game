@@ -1,26 +1,24 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import Button from '@atlaskit/button';
+import { Map } from 'immutable';
 
-import messages from './home.messages';
+import { AppBar } from '../../components/appBar/appBar.component';
+
 import { Wrapper, Logo, Title, Image } from './home.styles';
-import { Screen } from '../../theme';
+import { Screen, Container } from '../../theme';
+import messages from './home.messages';
 
 export class Home extends PureComponent {
   static propTypes = {
     isLoggedIn: PropTypes.bool.isRequired,
+    user: PropTypes.instanceOf(Map).isRequired,
     logout: PropTypes.func.isRequired,
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
     history: PropTypes.shape({
       push: PropTypes.func.isRequired,
     }).isRequired,
-  };
-
-  handleLogout = () => {
-    this.props.logout();
   };
 
   render() {
@@ -32,18 +30,17 @@ export class Home extends PureComponent {
 
     return (
       <Screen>
-        <Wrapper>
-          <Logo name="logo" />
-          <Title>Home</Title>
-
-          <Image src={user.get('avatar')} />
-          <h4>{user.get('name')}</h4>
-          <h5>{user.get('email')}</h5>
-
-          <br />
-
-          <Button appearance="warning" onClick={this.handleLogout}>Logout</Button>
-        </Wrapper>
+        <AppBar
+          logout={this.props.logout}
+          title={messages.title}
+          user={user}
+        />
+        <Container>
+          <Wrapper>
+            <Logo name="logo" />
+            <Title>Home</Title>
+          </Wrapper>
+        </Container>
       </Screen>
     );
   }

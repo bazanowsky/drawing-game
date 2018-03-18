@@ -7,19 +7,20 @@ export const Screen = styled.div`
   display: flex;
   background: #f2f2f2;
   flex: 1 0 auto;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  padding-left: 10%;
-  padding-right: 10%;
+  align-items: stretch;
 `;
 
 export const Container = styled.div`
   display: flex;
-  flex: 1 0 auto;
+  flex: 1 1 auto;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+  padding: 50px 10%;
+  overflow:  auto;
 `;
 
 export const Wrapper = styled.div`

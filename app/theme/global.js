@@ -21,10 +21,11 @@ injectGlobal`
     padding: 0;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
+    background: #f2f2f2;
   }
   .app__wrapper {
     display: flex;
-    height: 100%;    
+    min-height: 100%;    
   }
   #app {
     display: flex;
