@@ -2,11 +2,33 @@
 # yarn lockfile v1
 
 
+"@atlaskit/analytics-next@^1.1.2":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@atlaskit/analytics-next/-/analytics-next-1.1.3.tgz#a1b1f72c2a4c4e9f0484318b8563e6f35579a27c"
+  dependencies:
+    prop-types "^15.5.10"
+
+"@atlaskit/button@^6.6.3":
+  version "6.6.3"
+  resolved "https://registry.yarnpkg.com/@atlaskit/button/-/button-6.6.3.tgz#8cd275ca510b2301fdb495608fd172cd082e61ea"
+  dependencies:
+    "@atlaskit/analytics-next" "^1.1.2"
+    "@atlaskit/theme" "^2.4.1"
+    babel-runtime "^6.26.0"
+    styled-components "1.4.6 - 3"
+
 "@atlaskit/css-reset@^1.2.3":
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/@atlaskit/css-reset/-/css-reset-1.2.3.tgz#001690620e4c1602b0cd12951ae016add121678c"
   dependencies:
     "@atlaskit/util-shared-styles" "^2.10.3"
+
+"@atlaskit/theme@^2.4.1":
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/@atlaskit/theme/-/theme-2.4.1.tgz#a554075068ff4d85542292998f3544160b4a5a73"
+  dependencies:
+    prop-types "^15.5.10"
+    styled-components "1.4.6 - 3"
 
 "@atlaskit/util-shared-styles@^2.10.3":
   version "2.10.7"
@@ -8409,7 +8431,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.0.0, prop-types@^15.5.4, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.0:
+prop-types@^15.0.0, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.0:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
   dependencies:
@@ -10002,7 +10024,7 @@ style-loader@^0.20.2:
     loader-utils "^1.1.0"
     schema-utils "^0.4.3"
 
-styled-components@^3.1.6:
+"styled-components@1.4.6 - 3", styled-components@^3.1.6:
   version "3.1.6"
   resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-3.1.6.tgz#9c443146fa82c6659a9f64dd493bf2202480342e"
   dependencies:

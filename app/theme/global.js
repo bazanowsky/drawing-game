@@ -22,4 +22,12 @@ injectGlobal`
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
   }
+  .app__wrapper {
+    display: flex;
+    height: 100%;    
+  }
+  #app {
+    display: flex;
+    flex: 1 0 auto;
+  }
 `;

@@ -1,11 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import Helmet from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
-import envConfig from 'env-config';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 
 import messages from './home.messages';
-import { Container, Title, TitleLogo, EnvName } from './home.styles';
+import { Wrapper, Logo, Title, Hint, ButtonsGroup, Button } from './home.styles';
+import { Screen } from '../../theme';
 
 export class Home extends PureComponent {
   static propTypes = {
@@ -19,9 +18,23 @@ export class Home extends PureComponent {
 
   render() {
     return (
-      <Container>
-asd
-      </Container>
+      <Screen>
+        <Wrapper>
+          <Logo name="logo" />
+          <Title>
+            <FormattedHTMLMessage {...messages.welcome} />
+          </Title>
+
+          <Hint>
+            <FormattedMessage {...messages.login} />
+          </Hint>
+
+          <ButtonsGroup>
+            <Button appearance="primary">Facebook</Button>
+            <Button appearance="danger">Google</Button>
+          </ButtonsGroup>
+        </Wrapper>
+      </Screen>
     );
   }
 }

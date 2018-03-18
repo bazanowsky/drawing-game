@@ -1,28 +1,27 @@
 import styled from 'styled-components';
+import KitButton from '@atlaskit/button';
+import * as Theme from '../../theme';
 
-import { SpriteImage } from '../../theme';
+export const Logo = Theme.SpriteImage.extend`
+  margin-top: 20px; 
+`;
 
-export const Container = styled.div`
- display: flex;
- flex-direction: column;
- align-items: center;
- justify-content: center;
- text-align: center;
+export const Wrapper = Theme.Wrapper.extend`
 `;
 
 export const Title = styled.h1`
- display: flex;
- flex-direction: column;
- align-items: center;
- justify-content: center;
+  text-align: center;
 `;
 
-export const TitleLogo = SpriteImage.extend`
-  margin-bottom: 16px;
+export const Hint = styled.h4`
+  margin: 30px 0;
 `;
 
-export const EnvName = styled.div`
-  color: green;
-  margin-top: 40px;
-  margin-bottom: 40px;
+export const ButtonsGroup = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+export const Button = styled(KitButton)`
+  margin: 0 5px;
 `;

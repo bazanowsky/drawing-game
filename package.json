@@ -62,6 +62,7 @@
     ]
   },
   "dependencies": {
+    "@atlaskit/button": "^6.6.3",
     "@atlaskit/css-reset": "^1.2.3",
     "axios": "^0.17.0",
     "babel-polyfill": "6.26.0",
