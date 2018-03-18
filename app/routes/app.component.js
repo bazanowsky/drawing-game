@@ -14,7 +14,12 @@ export class App extends PureComponent {
       push: PropTypes.func.isRequired,
     }).isRequired,
     location: PropTypes.object.isRequired,
+    startup: PropTypes.func.isRequired,
   };
+
+  componentWillMount() {
+    this.props.startup();
+  }
 
   render() {
     return (

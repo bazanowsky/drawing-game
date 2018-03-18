@@ -7,14 +7,14 @@ import { compose } from 'ramda';
 
 import { App } from './app.component';
 import { selectLocalesLanguage } from '../modules/locales/locales.selectors';
-import { LocalesActions } from '../modules/locales/locales.redux';
-
+import { StartupActions } from '../modules/startup/startup.redux';
 
 const mapStateToProps = createStructuredSelector({
   language: selectLocalesLanguage,
 });
 
 export const mapDispatchToProps = (dispatch) => bindActionCreators({
+  startup: StartupActions.startup,
 }, dispatch);
 
 export default compose(

@@ -20,7 +20,7 @@ export class Home extends PureComponent {
   render() {
     return (
       <Container>
-
+asd
       </Container>
     );
   }
