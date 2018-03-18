@@ -6,9 +6,11 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'ramda';
 
 import { AuthActions } from '../../modules/auth/auth.redux';
+import { selectIsLoggedIn } from '../../modules/auth/auth.selectors';
 import { Login } from './login.component';
 
 const mapStateToProps = createStructuredSelector({
+  isLoggedIn: selectIsLoggedIn,
 });
 
 export const mapDispatchToProps = (dispatch) => bindActionCreators({

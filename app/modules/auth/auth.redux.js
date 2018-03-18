@@ -5,6 +5,7 @@ export const { Types: AuthTypes, Creators: AuthActions } = createActions({
   requestLogin: ['providerType'],
   updateUser: ['data'],
   clearUser: null,
+  logout: null,
 }, { prefix: 'AUTH_' });
 
 const AuthRecord = new Record({

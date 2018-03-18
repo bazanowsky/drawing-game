@@ -66,10 +66,20 @@ export function* watchAuthState() {
   }
 }
 
+export function* logout() {
+  try {
+    yield Auth.signOut();
+  } catch (error) {
+    /* istanbul ignore next */
+    reportError(error);
+  }
+}
+
 export function* watchAuth() {
   try {
     yield takeLatest(StartupTypes.STARTUP, watchAuthState);
     yield takeLatest(AuthTypes.REQUEST_LOGIN, requestLogin);
+    yield takeLatest(AuthTypes.LOGOUT, logout);
   } catch (error) {
     /* istanbul ignore next */
     reportError(error);

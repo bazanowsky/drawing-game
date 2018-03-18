@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { Redirect } from 'react-router-dom';
 
 import messages from './login.messages';
 import { Wrapper, Logo, Title, Hint, ButtonsGroup, Button } from './login.styles';
@@ -10,8 +11,8 @@ import { AUTH_PROVIDER_FACEBOOK, AUTH_PROVIDER_GOOGLE } from '../../modules/auth
 
 export class Login extends PureComponent {
   static propTypes = {
+    isLoggedIn: PropTypes.bool.isRequired,
     login: PropTypes.func.isRequired,
-    items: PropTypes.object,
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
     history: PropTypes.shape({
@@ -24,6 +25,10 @@ export class Login extends PureComponent {
   };
 
   render() {
+    if (this.props.isLoggedIn) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <Screen>
         <Wrapper>
