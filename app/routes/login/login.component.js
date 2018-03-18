@@ -2,11 +2,11 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 
-import messages from './home.messages';
-import { Wrapper, Logo, Title } from './home.styles';
+import messages from './login.messages';
+import { Wrapper, Logo, Title, Hint, ButtonsGroup, Button } from './login.styles';
 import { Screen } from '../../theme';
 
-export class Home extends PureComponent {
+export class Login extends PureComponent {
   static propTypes = {
     items: PropTypes.object,
     match: PropTypes.object.isRequired,
@@ -21,7 +21,18 @@ export class Home extends PureComponent {
       <Screen>
         <Wrapper>
           <Logo name="logo" />
-          <Title>Home</Title>
+          <Title>
+            <FormattedHTMLMessage {...messages.welcome} />
+          </Title>
+
+          <Hint>
+            <FormattedMessage {...messages.login} />
+          </Hint>
+
+          <ButtonsGroup>
+            <Button appearance="primary">Facebook</Button>
+            <Button appearance="danger">Google</Button>
+          </ButtonsGroup>
         </Wrapper>
       </Screen>
     );

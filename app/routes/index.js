@@ -8,6 +8,7 @@ import '../theme/global';
 
 import App from './app.container';
 import { Home } from './home';
+import { Login } from './login';
 import { NotFound } from './notFound';
 
 export class RootContainer extends Component {
@@ -17,6 +18,7 @@ export class RootContainer extends Component {
         <Route exact path="/404" component={NotFound} />
         <App>
           <Switch>
+            <Route exact path="/login" component={Login} />
             <Route exact path="/" component={Home} />
 
             <Route component={NotFound} />
