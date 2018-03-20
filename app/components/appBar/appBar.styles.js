@@ -11,16 +11,9 @@ export const Header = styled.header`
   height: 60px;
 `;
 
-
 export const Title = styled.h3`
   color: #fff;
   margin: 0 20px 0 0;
-`;
-
-export const PullRight = styled.div`
-  margin-left: auto;
-  display: flex;
-  align-items: center;
 `;
 
 export const Avatar = styled.img`

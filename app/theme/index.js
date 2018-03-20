@@ -1,7 +1,15 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 export { default as SpriteImage } from './spriteImage.component';
 
 export * as sprites from './sprites';
+
+export const shadowDefault = css`
+  box-shadow: 0 4px 11px 0 rgba(0,0,0,.12);  
+`;
+
+export const shadowSmall = css`
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.32);  
+`;
 
 export const Screen = styled.div`
   display: flex;
@@ -33,5 +41,17 @@ export const Wrapper = styled.div`
   min-height: 400px;
   background: #ffffff;
   padding: 20px;
-  box-shadow: 0 4px 11px 0 rgba(0,0,0,.12);
+  ${shadowDefault}
+`;
+
+export const SmallText = styled.span`
+  font-size: 14px;
+`;
+
+export const SmallTextBlock = styled(SmallText.withComponent('div'))``;
+
+export const PullRight = styled.div`
+  margin-left: auto;
+  display: flex;
+  align-items: center;
 `;

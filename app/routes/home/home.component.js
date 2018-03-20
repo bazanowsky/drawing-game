@@ -4,8 +4,9 @@ import { Redirect } from 'react-router-dom';
 import { Map } from 'immutable';
 
 import { AppBar } from '../../components/appBar/appBar.component';
+import { RoomsLobby } from '../../components/roomsLobby/roomsLobby.component';
 
-import { Wrapper, Logo, Title, Image } from './home.styles';
+import { Wrapper, RoomsListContainer, Sidebar } from './home.styles';
 import { Screen, Container } from '../../theme';
 import messages from './home.messages';
 
@@ -37,8 +38,12 @@ export class Home extends PureComponent {
         />
         <Container>
           <Wrapper>
-            <Logo name="logo" />
-            <Title>Home</Title>
+            <RoomsListContainer>
+              <RoomsLobby />
+            </RoomsListContainer>
+            <Sidebar>
+              <div>lobby</div>
+            </Sidebar>
           </Wrapper>
         </Container>
       </Screen>

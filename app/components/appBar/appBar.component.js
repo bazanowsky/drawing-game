@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Map } from 'immutable';
 
-import { Header, Title, PullRight, Avatar, UserName, LogoutButton } from './appBar.styles';
+import { Header, Title, Avatar, UserName, LogoutButton } from './appBar.styles';
+import { PullRight } from '../../theme/index';
 import messages from './appBar.messages';
 
 export class AppBar extends PureComponent {
