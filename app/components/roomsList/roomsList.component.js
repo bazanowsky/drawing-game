@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
 import { range } from 'ramda';
 import {
-  Container, Room,
+  Container,
 } from './roomsList.styles';
+import { RoomsListItem } from './roomsListItem/roomsListItem.component';
 
 export class RoomsList extends PureComponent {
   render() {
@@ -11,7 +12,7 @@ export class RoomsList extends PureComponent {
     return (
       <Container>
         {range(0, count).map((item, index) => (
-          <Room key={index}>{index + 1}</Room>
+          <RoomsListItem key={index}>{index + 1}</RoomsListItem>
         ))}
       </Container>
     );
