@@ -10,7 +10,7 @@ export const Wrapper = Theme.Wrapper.extend`
   align-items: stretch;
   background: transparent;
   box-shadow: none;
-  max-height: 76vh;
+  height: 76vh;
 `;
 
 export const RoomsListContainer = styled.div`
