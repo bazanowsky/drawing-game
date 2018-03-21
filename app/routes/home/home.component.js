@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import { Map } from 'immutable';
+import { Map, List } from 'immutable';
 
 import { AppBar } from '../../components/appBar/appBar.component';
 import { RoomsLobby } from '../../components/roomsLobby/roomsLobby.component';
@@ -15,6 +15,8 @@ export class Home extends PureComponent {
     isLoggedIn: PropTypes.bool.isRequired,
     user: PropTypes.instanceOf(Map).isRequired,
     logout: PropTypes.func.isRequired,
+    rooms: PropTypes.instanceOf(List).isRequired,
+    addRoom: PropTypes.func.isRequired,
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
     history: PropTypes.shape({
@@ -23,7 +25,7 @@ export class Home extends PureComponent {
   };
 
   render() {
-    const { user, isLoggedIn } = this.props;
+    const { user, isLoggedIn, rooms, addRoom } = this.props;
 
     if (!isLoggedIn) {
       return <Redirect to="/login" />;
@@ -39,7 +41,10 @@ export class Home extends PureComponent {
         <Container>
           <Wrapper>
             <RoomsListContainer>
-              <RoomsLobby />
+              <RoomsLobby
+                rooms={rooms}
+                addRoom={addRoom}
+              />
             </RoomsListContainer>
             <Sidebar>
               <div>lobby</div>

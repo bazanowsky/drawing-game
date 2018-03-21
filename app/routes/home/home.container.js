@@ -8,14 +8,18 @@ import { compose } from 'ramda';
 import { selectIsLoggedIn, selectUser } from '../../modules/auth/auth.selectors';
 import { Home } from './home.component';
 import { AuthActions } from '../../modules/auth/auth.redux';
+import { RoomsActions } from '../../modules/rooms/rooms.redux';
+import { selectRooms } from '../../modules/rooms/rooms.selectors';
 
 const mapStateToProps = createStructuredSelector({
   isLoggedIn: selectIsLoggedIn,
   user: selectUser,
+  rooms: selectRooms,
 });
 
 export const mapDispatchToProps = (dispatch) => bindActionCreators({
   logout: AuthActions.logout,
+  addRoom: RoomsActions.addRoom,
 }, dispatch);
 
 export default compose(
