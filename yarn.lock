@@ -23,6 +23,15 @@
   dependencies:
     "@atlaskit/util-shared-styles" "^2.10.3"
 
+"@atlaskit/icon@^10.13.0":
+  version "10.13.0"
+  resolved "https://registry.yarnpkg.com/@atlaskit/icon/-/icon-10.13.0.tgz#d662c212ced45aea03644e5375bebf8c52dc4efa"
+  dependencies:
+    "@atlaskit/theme" "^2.4.1"
+    babel-runtime "^6.26.0"
+    styled-components "1.4.6 - 3"
+    uuid "^3.1.0"
+
 "@atlaskit/theme@^2.4.1":
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/@atlaskit/theme/-/theme-2.4.1.tgz#a554075068ff4d85542292998f3544160b4a5a73"
