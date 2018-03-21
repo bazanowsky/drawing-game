@@ -10,16 +10,17 @@ import { RoomsListItem } from './roomsListItem/roomsListItem.component';
 export class RoomsList extends PureComponent {
   static propTypes = {
     rooms: PropTypes.instanceOf(List).isRequired,
+    removeRoom: PropTypes.func.isRequired,
   };
 
   render() {
-    const { rooms } = this.props;
+    const { rooms, removeRoom } = this.props;
 
     return (
       <Container>
         {rooms.map((room) => {
           return (
-            <RoomsListItem key={room.get('id')} data={room} />
+            <RoomsListItem key={room.get('id')} data={room} removeRoom={removeRoom} />
           );
         }).toArray()}
       </Container>

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import KitButton from '@atlaskit/button';
+import { IconButton } from '../../../theme/index';
 
 export const Room = styled.div`
   display: flex;
@@ -13,6 +13,6 @@ export const Room = styled.div`
   padding: 6px;
 `;
 
-export const RemoveButton = styled(KitButton)`
+export const RemoveButton = styled(IconButton)`
   margin-left: auto;
 `;

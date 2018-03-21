@@ -1,4 +1,6 @@
 import styled, { css } from 'styled-components';
+import KitButton from '@atlaskit/button';
+
 export { default as SpriteImage } from './spriteImage.component';
 
 export * as sprites from './sprites';
@@ -54,4 +56,16 @@ export const PullRight = styled.div`
   margin-left: auto;
   display: flex;
   align-items: center;
+`;
+
+
+export const IconButton = styled(KitButton)`
+  display: inline-flex;
+  align-self: flex-start;
+  flex: 0 0 auto;
+  border-radius: 50px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  justify-content: center;
 `;

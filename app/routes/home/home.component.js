@@ -17,6 +17,7 @@ export class Home extends PureComponent {
     logout: PropTypes.func.isRequired,
     rooms: PropTypes.instanceOf(List).isRequired,
     addRoom: PropTypes.func.isRequired,
+    removeRoom: PropTypes.func.isRequired,
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
     history: PropTypes.shape({
@@ -25,7 +26,7 @@ export class Home extends PureComponent {
   };
 
   render() {
-    const { user, isLoggedIn, rooms, addRoom } = this.props;
+    const { user, isLoggedIn, rooms, addRoom, removeRoom } = this.props;
 
     if (!isLoggedIn) {
       return <Redirect to="/login" />;
@@ -44,6 +45,7 @@ export class Home extends PureComponent {
               <RoomsLobby
                 rooms={rooms}
                 addRoom={addRoom}
+                removeRoom={removeRoom}
               />
             </RoomsListContainer>
             <Sidebar>

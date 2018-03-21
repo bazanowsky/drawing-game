@@ -20,6 +20,7 @@ const mapStateToProps = createStructuredSelector({
 export const mapDispatchToProps = (dispatch) => bindActionCreators({
   logout: AuthActions.logout,
   addRoom: RoomsActions.addRoom,
+  removeRoom: RoomsActions.removeRoom,
 }, dispatch);
 
 export default compose(

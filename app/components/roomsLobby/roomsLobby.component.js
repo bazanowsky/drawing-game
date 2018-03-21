@@ -13,6 +13,7 @@ import { PullRight } from '../../theme/index';
 export class RoomsLobby extends PureComponent {
   static propTypes = {
     addRoom: PropTypes.func.isRequired,
+    removeRoom: PropTypes.func.isRequired,
     rooms: PropTypes.instanceOf(List).isRequired,
   };
 
@@ -24,7 +25,7 @@ export class RoomsLobby extends PureComponent {
   };
 
   render() {
-    const { rooms } = this.props;
+    const { rooms, removeRoom } = this.props;
     return (
       <Container>
         <ControlBar>
@@ -43,7 +44,7 @@ export class RoomsLobby extends PureComponent {
           </PullRight>
         </ControlBar>
         <RoomsWrapper>
-          <RoomsList rooms={rooms} />
+          <RoomsList rooms={rooms} removeRoom={removeRoom} />
         </RoomsWrapper>
       </Container>
     );
