@@ -1,4 +1,5 @@
-import { put, takeLatest, takeEvery, select } from 'redux-saga/effects';
+import { put, call, takeLatest, take, takeEvery, select } from 'redux-saga/effects';
+import { eventChannel } from 'redux-saga';
 import reportError from 'report-error';
 import { defaultTo } from 'ramda';
 
@@ -6,16 +7,14 @@ import { RoomsTypes, RoomsActions } from './rooms.redux';
 import { Database, returnValue } from '../../services/firebase';
 import { selectUser } from '../auth/auth.selectors';
 
+const roomsRef = Database.ref('rooms');
+const counterRef = Database.ref('counters/rooms');
+
 export function* createRoom() {
   try {
     const user = yield select(selectUser);
 
-    const roomRef = yield Database.ref('rooms').push({
-      author: user.get('email'),
-    });
-
-    const roomsCountRef = yield Database.ref('counters/rooms');
-    const roomsCount = yield roomsCountRef.transaction((count) => {
+    const roomsCount = yield counterRef.transaction((count) => {
       if (count === null) {
         return count;
       }
@@ -23,24 +22,57 @@ export function* createRoom() {
       return count + 1;
     }).then(returnValue);
 
-    yield roomRef.transaction((room) => {
-      if (room) {
-        room.id = roomsCount;
-      }
-      return room;
-    }).then(returnValue);
+    yield roomsRef.push({
+      id: roomsCount,
+      owner: user.get('email'),
+    });
   } catch (error) {
     /* istanbul ignore next */
     reportError(error);
   }
 }
 
-// export function*
+
+const roomAddedListener = () => {
+  return eventChannel(emitter => {
+    roomsRef.on('child_added', (snapshot) => {
+      const room = snapshot.val();
+
+      if (room) {
+        emitter(room);
+      } else {
+        emitter(false);
+      }
+    });
+
+    return () => {
+      console.log('event channel closed');
+    };
+  });
+};
+
+
+export function* startWatchRooms() {
+  try {
+    const channel = yield call(roomAddedListener);
+
+    while (true) {
+      const room = yield take(channel);
+
+      if (room) {
+        yield put(RoomsActions.add(room));
+      }
+    }
+  } catch (error) {
+    /* istanbul ignore next */
+    reportError(error);
+  }
+}
 
 export function* watchRooms() {
   try {
     yield takeEvery(RoomsTypes.CREATE, createRoom);
-    // yield takeLatest(RoomsTypes.START_WATCH, startWatchRooms);
+    yield takeLatest(RoomsTypes.START_WATCH, startWatchRooms);
   } catch (error) {
     /* istanbul ignore next */
     reportError(error);

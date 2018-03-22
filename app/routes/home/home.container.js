@@ -21,6 +21,7 @@ export const mapDispatchToProps = (dispatch) => bindActionCreators({
   logout: AuthActions.logout,
   createRoom: RoomsActions.create,
   removeRoom: RoomsActions.remove,
+  startWatchRooms: RoomsActions.startWatch,
 }, dispatch);
 
 export default compose(

@@ -1,9 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 import { Map } from 'immutable';
 import TrashIcon from '@atlaskit/icon/glyph/trash';
 
-import { Room, RemoveButton } from './roomsListItem.styles';
+import {
+  Room, RemoveButton, Meta, Owner, RoomId,
+} from './roomsListItem.styles';
+import messages from './roomsListItem.messages';
 
 export class RoomsListItem extends PureComponent {
   static propTypes = {
@@ -18,7 +22,24 @@ export class RoomsListItem extends PureComponent {
     const { data } = this.props;
     return (
       <Room>
-        <h5>{data.get('name', '')}: {data.get('id')}</h5>
+        <Meta>
+          <RoomId>
+            <FormattedMessage
+              {...messages.roomId}
+              values={{
+                id: data.get('id', ''),
+              }}
+            />
+          </RoomId>
+          <Owner>
+            <FormattedMessage
+              {...messages.owner}
+              values={{
+                owner: data.get('owner', ''),
+              }}
+            />
+          </Owner>
+        </Meta>
         <RemoveButton onClick={this.handleRemove} appearance="danger">
           <TrashIcon primaryColor="inherit" size="small" />
         </RemoveButton>

@@ -11,8 +11,11 @@ export class RoomsList extends PureComponent {
   static propTypes = {
     rooms: PropTypes.instanceOf(List).isRequired,
     removeRoom: PropTypes.func.isRequired,
+    startWatchRooms: PropTypes.func.isRequired,
   };
-
+  componentWillMount() {
+    this.props.startWatchRooms();
+  }
   render() {
     const { rooms, removeRoom } = this.props;
 

@@ -16,3 +16,16 @@ export const Room = styled.div`
 export const RemoveButton = styled(IconButton)`
   margin-left: auto;
 `;
+
+export const Meta = styled.div`
+  font-size: 12px;
+`;
+
+export const Owner = styled.span`
+  font-weight: 600;
+`;
+
+export const RoomId = styled.span`
+  color: #666;
+  margin-right: 20px;
+`;

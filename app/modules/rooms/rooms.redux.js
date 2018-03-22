@@ -20,7 +20,7 @@ export const INITIAL_STATE = new RoomsRecord({});
 
 export const addRoom = (state, { data }) => (
   state.update('rooms', rooms => {
-    return rooms.push(fromJS(pick(['id', 'author'], data)));
+    return rooms.push(fromJS(pick(['id', 'owner'], data)));
   })
 );
 
