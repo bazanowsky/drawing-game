@@ -12,16 +12,13 @@ import { PullRight } from '../../theme/index';
 
 export class RoomsLobby extends PureComponent {
   static propTypes = {
-    addRoom: PropTypes.func.isRequired,
+    createRoom: PropTypes.func.isRequired,
     removeRoom: PropTypes.func.isRequired,
     rooms: PropTypes.instanceOf(List).isRequired,
   };
 
   handleCreateRoom = () => {
-    const room = {
-      name: 'asdf',
-    };
-    this.props.addRoom(room);
+    this.props.createRoom();
   };
 
   render() {
@@ -33,7 +30,7 @@ export class RoomsLobby extends PureComponent {
             <FormattedMessage
               {...messages.status}
               values={{
-                roomsCount: 5,
+                roomsCount: rooms.size,
               }}
             />
           </Status>

@@ -14,4 +14,6 @@ export const Auth = firebase.auth();
 
 export const Database = firebase.database();
 
+export const returnValue = ({ snapshot }) => snapshot.val();
+
 export default firebase;
