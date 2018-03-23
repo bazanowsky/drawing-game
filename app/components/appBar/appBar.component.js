@@ -1,9 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { Map } from 'immutable';
 
-import { Header, Title, Avatar, UserName, LogoutButton } from './appBar.styles';
+import {
+  Header, Title, Avatar, UserName, LogoutButton, Nav, NavButton,
+} from './appBar.styles';
 import { PullRight } from '../../theme/index';
 import messages from './appBar.messages';
 
@@ -25,6 +28,15 @@ export class AppBar extends PureComponent {
         <Title>
           <FormattedMessage {...title} />
         </Title>
+
+        <Nav>
+          <NavButton to="/about">
+            <FormattedMessage {...messages.about} />
+          </NavButton>
+          <NavButton to="/contact">
+            <FormattedMessage {...messages.contact} />
+          </NavButton>
+        </Nav>
 
         <PullRight>
           <Avatar src={user.get('avatar')} />

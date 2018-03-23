@@ -5,4 +5,12 @@ export default defineMessages({
     id: 'appbar.logout',
     defaultMessage: 'Logout',
   },
+  about: {
+    id: 'appbar.menu.about',
+    defaultMessage: 'About',
+  },
+  contact: {
+    id: 'appbar.menu.contact',
+    defaultMessage: 'Contact',
+  },
 });
