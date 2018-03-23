@@ -1,7 +1,6 @@
-import { put, call, takeLatest, take, takeEvery, select } from 'redux-saga/effects';
+import { put, call, takeLatest, take, fork, takeEvery, select } from 'redux-saga/effects';
 import { eventChannel } from 'redux-saga';
 import reportError from 'report-error';
-import { defaultTo } from 'ramda';
 
 import { RoomsTypes, RoomsActions } from './rooms.redux';
 import { Database, returnValue } from '../../services/firebase';
@@ -32,11 +31,13 @@ export function* createRoom() {
   }
 }
 
-
 const roomAddedListener = () => {
   return eventChannel(emitter => {
     roomsRef.on('child_added', (snapshot) => {
-      const room = snapshot.val();
+      const room = {
+        uid: snapshot.key,
+        ...snapshot.val(),
+      };
 
       if (room) {
         emitter(room);
@@ -46,21 +47,47 @@ const roomAddedListener = () => {
     });
 
     return () => {
-      console.log('event channel closed');
+      roomsRef.off('child_added');
     };
   });
 };
 
+export const prepareRooms = (rooms) => {
+  if (!rooms) {
+    return [];
+  }
+
+  return Object.entries(rooms).map(([uid, room]) => ({
+    uid,
+    ...room,
+  }));
+};
+
+export function* fetchRooms() {
+  try {
+    const rooms = yield roomsRef.once('value').then(snapshot => snapshot.val());
+    const preparedRooms = prepareRooms(rooms);
+    yield put(RoomsActions.fetchSuccess(preparedRooms));
+  } catch (error) {
+    /* istanbul ignore next */
+    reportError(error);
+  }
+}
 
 export function* startWatchRooms() {
   try {
+    yield put(RoomsActions.fetch());
+    const { rooms } = yield take(RoomsTypes.FETCH_SUCCESS);
+    yield put(RoomsActions.set(rooms));
+
     const channel = yield call(roomAddedListener);
+    yield fork(stopWatchRooms, channel);
 
     while (true) {
-      const room = yield take(channel);
+      const newRoom = yield take(channel);
 
-      if (room) {
-        yield put(RoomsActions.add(room));
+      if (newRoom && !rooms.find(current => newRoom.uid === current.uid)) {
+        yield put(RoomsActions.add(newRoom));
       }
     }
   } catch (error) {
@@ -69,8 +96,19 @@ export function* startWatchRooms() {
   }
 }
 
+export function* stopWatchRooms(channel) {
+  try {
+    yield take(RoomsTypes.STOP_WATCH);
+    channel.close();
+  } catch (error) {
+    /* istanbul ignore next */
+    reportError(error);
+  }
+}
+
 export function* watchRooms() {
   try {
+    yield takeLatest(RoomsTypes.FETCH, fetchRooms);
     yield takeEvery(RoomsTypes.CREATE, createRoom);
     yield takeLatest(RoomsTypes.START_WATCH, startWatchRooms);
   } catch (error) {

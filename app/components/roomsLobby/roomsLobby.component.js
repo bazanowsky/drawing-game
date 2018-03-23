@@ -16,6 +16,7 @@ export class RoomsLobby extends PureComponent {
     createRoom: PropTypes.func.isRequired,
     removeRoom: PropTypes.func.isRequired,
     startWatchRooms: PropTypes.func.isRequired,
+    stopWatchRooms: PropTypes.func.isRequired,
   };
 
   handleCreateRoom = () => {
@@ -23,7 +24,7 @@ export class RoomsLobby extends PureComponent {
   };
 
   render() {
-    const { rooms, removeRoom, startWatchRooms } = this.props;
+    const { rooms, removeRoom, startWatchRooms, stopWatchRooms } = this.props;
     return (
       <Container>
         <ControlBar>
@@ -42,7 +43,12 @@ export class RoomsLobby extends PureComponent {
           </PullRight>
         </ControlBar>
         <RoomsWrapper>
-          <RoomsList rooms={rooms} removeRoom={removeRoom} startWatchRooms={startWatchRooms} />
+          <RoomsList
+            rooms={rooms}
+            removeRoom={removeRoom}
+            startWatchRooms={startWatchRooms}
+            stopWatchRooms={stopWatchRooms}
+          />
         </RoomsWrapper>
       </Container>
     );

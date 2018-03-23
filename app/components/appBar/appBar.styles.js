@@ -39,6 +39,7 @@ export const NavButton = styled(Link)`
     color: #fff;
     background-color: rgba(255,255,255,.2);
     text-decoration: none;
+    outline: none;
   }
   
   &:first-child {

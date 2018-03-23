@@ -6,8 +6,10 @@ export const { Types: RoomsTypes, Creators: RoomsActions } = createActions({
   startWatch: null,
   stopWatch: null,
   fetch: null,
+  fetchSuccess: ['rooms'],
   create: null,
-  add: ['data'],
+  set: ['rooms'],
+  add: ['room'],
   remove: ['id'],
 }, { prefix: 'ROOMS_' });
 
@@ -18,9 +20,13 @@ const RoomsRecord = new Record({
 
 export const INITIAL_STATE = new RoomsRecord({});
 
-export const addRoom = (state, { data }) => (
+export const setRooms = (state, { rooms }) => {
+  return state.set('rooms', fromJS(rooms));
+};
+
+export const addRoom = (state, { room }) => (
   state.update('rooms', rooms => {
-    return rooms.push(fromJS(pick(['id', 'owner'], data)));
+    return rooms.push(fromJS(room));
   })
 );
 
@@ -32,6 +38,7 @@ export const removeRoom = (state, { id }) => (
 );
 
 export const reducer = createReducer(INITIAL_STATE, {
+  [RoomsTypes.SET]: setRooms,
   [RoomsTypes.ADD]: addRoom,
   [RoomsTypes.REMOVE]: removeRoom,
 });
