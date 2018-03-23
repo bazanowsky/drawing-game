@@ -16,7 +16,7 @@ export class RoomsListItem extends PureComponent {
   };
   handleRemove = () => {
     const { data, removeRoom } = this.props;
-    removeRoom(data.get('id'));
+    removeRoom(data.get('uid'));
   };
   render() {
     const { data } = this.props;

@@ -31,6 +31,16 @@ export function* createRoom() {
   }
 }
 
+export function* removeRoom({ uid }) {
+  try {
+    yield roomsRef.child(uid).remove();
+    yield put(RoomsActions.removeSuccess(uid));
+  } catch (error) {
+    /* istanbul ignore next */
+    reportError(error);
+  }
+}
+
 const roomAddedListener = () => {
   return eventChannel(emitter => {
     roomsRef.on('child_added', (snapshot) => {
@@ -109,6 +119,7 @@ export function* stopWatchRooms(channel) {
 export function* watchRooms() {
   try {
     yield takeLatest(RoomsTypes.FETCH, fetchRooms);
+    yield takeLatest(RoomsTypes.REMOVE, removeRoom);
     yield takeEvery(RoomsTypes.CREATE, createRoom);
     yield takeLatest(RoomsTypes.START_WATCH, startWatchRooms);
   } catch (error) {

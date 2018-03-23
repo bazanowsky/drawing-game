@@ -10,7 +10,8 @@ export const { Types: RoomsTypes, Creators: RoomsActions } = createActions({
   create: null,
   set: ['rooms'],
   add: ['room'],
-  remove: ['id'],
+  remove: ['uid'],
+  removeSuccess: ['uid'],
 }, { prefix: 'ROOMS_' });
 
 const RoomsRecord = new Record({
@@ -30,9 +31,9 @@ export const addRoom = (state, { room }) => (
   })
 );
 
-export const removeRoom = (state, { id }) => (
+export const removeRoom = (state, { uid }) => (
   state.update('rooms', rooms => {
-    const index = rooms.findIndex((room) => room.get('id') === id);
+    const index = rooms.findIndex((room) => room.get('uid') === uid);
     return rooms.delete(index);
   })
 );
@@ -40,5 +41,5 @@ export const removeRoom = (state, { id }) => (
 export const reducer = createReducer(INITIAL_STATE, {
   [RoomsTypes.SET]: setRooms,
   [RoomsTypes.ADD]: addRoom,
-  [RoomsTypes.REMOVE]: removeRoom,
+  [RoomsTypes.REMOVE_SUCCESS]: removeRoom,
 });
