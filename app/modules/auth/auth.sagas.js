@@ -6,7 +6,7 @@ import { cond, equals, always, T } from 'ramda';
 import { AuthTypes, AuthActions } from './auth.redux';
 import { StartupTypes } from '../startup/';
 
-import Firebase, { Auth } from '../../services/firebase';
+import Firebase, { Auth, Database } from '../../services/firebase';
 import { AUTH_PROVIDER_GOOGLE, AUTH_PROVIDER_FACEBOOK } from './auth.constants';
 
 export function* requestLogin({ providerType }) {
@@ -19,7 +19,7 @@ export function* requestLogin({ providerType }) {
 
     Auth.signInWithPopup(provider);
   } catch (error) {
-  /* istanbul ignore next */
+    /* istanbul ignore next */
     reportError(error);
   }
 }
@@ -54,6 +54,7 @@ export function* watchAuthState() {
 
     while (true) {
       const userData = yield take(channel);
+
       if (userData) {
         yield put(AuthActions.updateUser(userData));
       } else {

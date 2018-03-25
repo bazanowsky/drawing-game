@@ -5,6 +5,7 @@ import reportError from 'report-error';
 import { RoomsTypes, RoomsActions } from './rooms.redux';
 import { Database, returnValue } from '../../services/firebase';
 import { selectUser } from '../auth/auth.selectors';
+import { ROOM_ADDED, ROOM_REMOVED } from './rooms.constants';
 
 const roomsRef = Database.ref('rooms');
 const counterRef = Database.ref('counters/rooms');
@@ -34,14 +35,13 @@ export function* createRoom() {
 export function* removeRoom({ uid }) {
   try {
     yield roomsRef.child(uid).remove();
-    yield put(RoomsActions.removeSuccess(uid));
   } catch (error) {
     /* istanbul ignore next */
     reportError(error);
   }
 }
 
-const roomAddedListener = () => {
+const roomsListener = () => {
   return eventChannel(emitter => {
     roomsRef.on('child_added', (snapshot) => {
       const room = {
@@ -49,15 +49,29 @@ const roomAddedListener = () => {
         ...snapshot.val(),
       };
 
-      if (room) {
-        emitter(room);
-      } else {
-        emitter(false);
-      }
+      const action = {
+        action: ROOM_ADDED,
+        room,
+      };
+      emitter(action);
+    });
+
+    roomsRef.on('child_removed', (snapshot) => {
+      const room = {
+        uid: snapshot.key,
+      };
+
+      const action = {
+        action: ROOM_REMOVED,
+        room,
+      };
+
+      emitter(action);
     });
 
     return () => {
       roomsRef.off('child_added');
+      roomsRef.off('child_removed');
     };
   });
 };
@@ -90,14 +104,20 @@ export function* startWatchRooms() {
     const { rooms } = yield take(RoomsTypes.FETCH_SUCCESS);
     yield put(RoomsActions.set(rooms));
 
-    const channel = yield call(roomAddedListener);
+    const channel = yield call(roomsListener);
     yield fork(stopWatchRooms, channel);
 
     while (true) {
-      const newRoom = yield take(channel);
+      const event = yield take(channel);
 
-      if (newRoom && !rooms.find(current => newRoom.uid === current.uid)) {
-        yield put(RoomsActions.add(newRoom));
+      if (event.action === ROOM_ADDED) {
+        if (!rooms.find(current => event.room.uid === current.uid)) {
+          yield put(RoomsActions.add(event.room));
+        }
+      }
+
+      if (event.action === ROOM_REMOVED) {
+        yield put(RoomsActions.remove(event.room.uid));
       }
     }
   } catch (error) {
@@ -119,7 +139,7 @@ export function* stopWatchRooms(channel) {
 export function* watchRooms() {
   try {
     yield takeLatest(RoomsTypes.FETCH, fetchRooms);
-    yield takeLatest(RoomsTypes.REMOVE, removeRoom);
+    yield takeLatest(RoomsTypes.REQUEST_REMOVE, removeRoom);
     yield takeEvery(RoomsTypes.CREATE, createRoom);
     yield takeLatest(RoomsTypes.START_WATCH, startWatchRooms);
   } catch (error) {

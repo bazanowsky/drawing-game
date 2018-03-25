@@ -10,19 +10,23 @@ import { Home } from './home.component';
 import { AuthActions } from '../../modules/auth/auth.redux';
 import { RoomsActions } from '../../modules/rooms/rooms.redux';
 import { selectRooms } from '../../modules/rooms/rooms.selectors';
+import { UsersActions } from '../../modules/users/users.redux';
+import { selectUsers } from '../../modules/users/users.selectors';
 
 const mapStateToProps = createStructuredSelector({
   isLoggedIn: selectIsLoggedIn,
   user: selectUser,
   rooms: selectRooms,
+  users: selectUsers,
 });
 
 export const mapDispatchToProps = (dispatch) => bindActionCreators({
   logout: AuthActions.logout,
   createRoom: RoomsActions.create,
-  removeRoom: RoomsActions.remove,
+  removeRoom: RoomsActions.requestRemove,
   startWatchRooms: RoomsActions.startWatch,
   stopWatchRooms: RoomsActions.stopWatch,
+  fetchUsers: UsersActions.fetchUsers,
 }, dispatch);
 
 export default compose(

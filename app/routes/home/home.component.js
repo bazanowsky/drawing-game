@@ -5,6 +5,7 @@ import { Map, List } from 'immutable';
 
 import { AppBar } from '../../components/appBar/appBar.component';
 import { RoomsLobby } from '../../components/roomsLobby/roomsLobby.component';
+import { UsersLobby } from '../../components/usersLobby/usersLobby.component';
 
 import { Wrapper, RoomsListContainer, Sidebar } from './home.styles';
 import { Screen, Container } from '../../theme';
@@ -20,6 +21,7 @@ export class Home extends PureComponent {
     removeRoom: PropTypes.func.isRequired,
     startWatchRooms: PropTypes.func.isRequired,
     stopWatchRooms: PropTypes.func.isRequired,
+    fetchUsers: PropTypes.func.isRequired,
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
     history: PropTypes.shape({
@@ -27,8 +29,12 @@ export class Home extends PureComponent {
     }).isRequired,
   };
 
+  componentDidMount() {
+    this.props.fetchUsers();
+  }
+
   render() {
-    const { user, isLoggedIn, rooms, createRoom, removeRoom, startWatchRooms, stopWatchRooms } = this.props;
+    const { user, isLoggedIn, users, rooms, createRoom, removeRoom, startWatchRooms, stopWatchRooms } = this.props;
 
     if (!isLoggedIn) {
       return <Redirect to="/login" />;
@@ -53,7 +59,7 @@ export class Home extends PureComponent {
               />
             </RoomsListContainer>
             <Sidebar>
-              <div>lobby</div>
+              <UsersLobby users={users} />
             </Sidebar>
           </Wrapper>
         </Container>

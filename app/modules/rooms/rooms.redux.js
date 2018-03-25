@@ -11,7 +11,7 @@ export const { Types: RoomsTypes, Creators: RoomsActions } = createActions({
   set: ['rooms'],
   add: ['room'],
   remove: ['uid'],
-  removeSuccess: ['uid'],
+  requestRemove: ['uid'],
 }, { prefix: 'ROOMS_' });
 
 const RoomsRecord = new Record({
@@ -41,5 +41,5 @@ export const removeRoom = (state, { uid }) => (
 export const reducer = createReducer(INITIAL_STATE, {
   [RoomsTypes.SET]: setRooms,
   [RoomsTypes.ADD]: addRoom,
-  [RoomsTypes.REMOVE_SUCCESS]: removeRoom,
+  [RoomsTypes.REMOVE]: removeRoom,
 });
