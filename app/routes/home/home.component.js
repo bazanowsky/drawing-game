@@ -17,6 +17,7 @@ export class Home extends PureComponent {
     user: PropTypes.instanceOf(Map).isRequired,
     logout: PropTypes.func.isRequired,
     rooms: PropTypes.instanceOf(List).isRequired,
+    users: PropTypes.instanceOf(List).isRequired,
     createRoom: PropTypes.func.isRequired,
     removeRoom: PropTypes.func.isRequired,
     startWatchRooms: PropTypes.func.isRequired,
@@ -31,10 +32,15 @@ export class Home extends PureComponent {
 
   componentDidMount() {
     this.props.fetchUsers();
+    this.props.startWatchRooms();
+  }
+
+  componentWillUnmount() {
+    this.props.stopWatchRooms();
   }
 
   render() {
-    const { user, isLoggedIn, users, rooms, createRoom, removeRoom, startWatchRooms, stopWatchRooms } = this.props;
+    const { user, isLoggedIn, users, rooms, createRoom, removeRoom } = this.props;
 
     if (!isLoggedIn) {
       return <Redirect to="/login" />;
@@ -54,8 +60,6 @@ export class Home extends PureComponent {
                 rooms={rooms}
                 createRoom={createRoom}
                 removeRoom={removeRoom}
-                startWatchRooms={startWatchRooms}
-                stopWatchRooms={stopWatchRooms}
               />
             </RoomsListContainer>
             <Sidebar>

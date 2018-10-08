@@ -9,6 +9,8 @@ import { StartupTypes } from '../startup/';
 import Firebase, { Auth, Database } from '../../services/firebase';
 import { AUTH_PROVIDER_GOOGLE, AUTH_PROVIDER_FACEBOOK } from './auth.constants';
 
+const userRef = null;
+
 export function* requestLogin({ providerType }) {
   try {
     const provider = cond([
@@ -35,6 +37,7 @@ const AuthStateListener = () => {
           uid: user.uid,
           provider: user.providerData[0].providerId,
           pid: user.providerData[0].uid,
+          online: true,
         };
         emitter(userData);
       } else {
@@ -54,7 +57,6 @@ export function* watchAuthState() {
 
     while (true) {
       const userData = yield take(channel);
-
       if (userData) {
         yield put(AuthActions.updateUser(userData));
       } else {
@@ -76,11 +78,21 @@ export function* logout() {
   }
 }
 
+export function* watchOnline() {
+  try {
+    console.log('test');
+  } catch (error) {
+    /* istanbul ignore next */
+    reportError(error);
+  }
+}
+
 export function* watchAuth() {
   try {
     yield takeLatest(StartupTypes.STARTUP, watchAuthState);
     yield takeLatest(AuthTypes.REQUEST_LOGIN, requestLogin);
     yield takeLatest(AuthTypes.LOGOUT, logout);
+    yield takeLatest(AuthTypes.WATCH_ONLINE, watchOnline);
   } catch (error) {
     /* istanbul ignore next */
     reportError(error);

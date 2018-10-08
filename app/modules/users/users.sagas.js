@@ -1,4 +1,4 @@
-import { put, takeLatest, take } from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
 import reportError from 'report-error';
 
 import { AuthTypes } from '../auth/auth.redux';
@@ -9,14 +9,12 @@ const usersRef = Database.ref('users');
 
 export function* updateUser({ data }) {
   try {
-    const user = yield usersRef.child(data.uid).update(data);
-    console.log(user);
+    yield usersRef.child(data.uid).update(data);
   } catch (error) {
     /* istanbul ignore next */
     reportError(error);
   }
 }
-
 
 export const prepareUsers = (users) => {
   if (!users) {

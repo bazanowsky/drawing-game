@@ -7,24 +7,44 @@ import { RoomsList } from '../roomsList/roomsList.component';
 import messages from './roomsLobby.messages';
 import {
   Container, ControlBar, Status, CreateRoomButton, RoomsWrapper,
+  Loading, LoadingBackground, Spinner,
 } from './roomsLobby.styles';
 import { PullRight } from '../../theme/index';
 
 export class RoomsLobby extends PureComponent {
   static propTypes = {
     rooms: PropTypes.instanceOf(List).isRequired,
+    loading: PropTypes.bool.isRequired,
     createRoom: PropTypes.func.isRequired,
     removeRoom: PropTypes.func.isRequired,
-    startWatchRooms: PropTypes.func.isRequired,
-    stopWatchRooms: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    loading: false,
   };
 
   handleCreateRoom = () => {
     this.props.createRoom();
   };
 
+  renderLoading = () => {
+    const { loading } = this.props;
+    console.log(loading);
+    return (
+      <Loading>
+        <LoadingBackground />
+        <Spinner
+          size={40}
+          spinnerColor={'#333'}
+          spinnerWidth={3}
+          visible={true}
+        />
+      </Loading>
+    );
+  };
+
   render() {
-    const { rooms, removeRoom, startWatchRooms, stopWatchRooms } = this.props;
+    const { rooms, removeRoom } = this.props;
     return (
       <Container>
         <ControlBar>
@@ -43,11 +63,10 @@ export class RoomsLobby extends PureComponent {
           </PullRight>
         </ControlBar>
         <RoomsWrapper>
+          {this.renderLoading()}
           <RoomsList
             rooms={rooms}
             removeRoom={removeRoom}
-            startWatchRooms={startWatchRooms}
-            stopWatchRooms={stopWatchRooms}
           />
         </RoomsWrapper>
       </Container>

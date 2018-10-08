@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import KitButton from '@atlaskit/button';
+import MaterialSpinner from 'react-spinner-material';
+
 import * as Theme from '../../theme';
 
 export const Container = styled.div`
@@ -33,4 +35,10 @@ export const RoomsWrapper = styled.div`
   flex-direction: column;
   overflow: auto;
   flex: 1 1 auto;
+`;
+
+export const Loading = styled.div``;
+export const LoadingBackground = styled.div``;
+export const Spinner = styled(MaterialSpinner)`
+  
 `;

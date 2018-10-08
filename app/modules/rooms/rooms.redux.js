@@ -16,6 +16,7 @@ export const { Types: RoomsTypes, Creators: RoomsActions } = createActions({
 
 const RoomsRecord = new Record({
   rooms: List(),
+  loading: false,
 });
 
 
@@ -23,6 +24,14 @@ export const INITIAL_STATE = new RoomsRecord({});
 
 export const setRooms = (state, { rooms }) => {
   return state.set('rooms', fromJS(rooms));
+};
+
+export const enableLoading = (state) => {
+  return state.set('loading', true);
+};
+
+export const disableLoading = (state) => {
+  return state.set('loading', false);
 };
 
 export const addRoom = (state, { room }) => (
@@ -40,6 +49,8 @@ export const removeRoom = (state, { uid }) => (
 
 export const reducer = createReducer(INITIAL_STATE, {
   [RoomsTypes.SET]: setRooms,
+  [RoomsTypes.FETCH]: enableLoading,
+  [RoomsTypes.FETCH_SUCCESS]: disableLoading,
   [RoomsTypes.ADD]: addRoom,
   [RoomsTypes.REMOVE]: removeRoom,
 });

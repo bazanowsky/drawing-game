@@ -4253,6 +4253,11 @@ eslint-plugin-import@^2.2.0:
     minimatch "^3.0.3"
     pkg-up "^1.0.0"
 
+eslint-plugin-promise@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-promise/-/eslint-plugin-promise-4.0.1.tgz#2d074b653f35a23d1ba89d8e976a985117d1c6a2"
+  integrity sha512-Si16O0+Hqz1gDHsys6RtFRrW7cCTB6P7p3OJmKp3Y3dxpQE2qwOA7d3xnV+0mBmrPoi0RBnxlCKvqu70te6wjg==
+
 eslint-plugin-react@^6.10.0:
   version "6.10.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-6.10.0.tgz#9c48b48d101554b5355413e7c64238abde6ef1ef"
@@ -10692,6 +10697,13 @@ react-side-effect@^1.1.0:
   dependencies:
     exenv "^1.2.1"
     shallowequal "^1.0.1"
+
+react-spinner-material@^1.0.17:
+  version "1.0.17"
+  resolved "https://registry.yarnpkg.com/react-spinner-material/-/react-spinner-material-1.0.17.tgz#1d313429b89bad806058f3d09865104b75ce063e"
+  integrity sha1-HTE0KbibrYBgWPPQmGUQS3XOBj4=
+  dependencies:
+    prop-types "^15.5.10"
 
 react-test-renderer@^16.0.0, react-test-renderer@^16.0.0-0:
   version "16.5.2"

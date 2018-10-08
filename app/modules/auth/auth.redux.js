@@ -6,6 +6,7 @@ export const { Types: AuthTypes, Creators: AuthActions } = createActions({
   updateUser: ['data'],
   clearUser: null,
   logout: null,
+  watchOnline: null,
 }, { prefix: 'AUTH_' });
 
 const AuthRecord = new Record({
